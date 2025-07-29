@@ -52,6 +52,11 @@
       color: white;
       text-decoration: none;
       border-radius: 6px;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+    .btn:hover {
+      background: #007944;
+      transform: translateY(-2px);
     }
     .tabs {
       text-align: center;
@@ -64,6 +69,11 @@
       background-color: #ccc;
       border-radius: 6px;
       cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+    .tabs button:hover {
+      background-color: #bbb;
+      transform: scale(1.05);
     }
     .tabs button.active {
       background-color: #00a859;
@@ -104,11 +114,20 @@
       height: 500px;
       text-align: center;
       justify-content: space-between;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .property:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.1);
     }
     .property img {
       width: 100%;
       height: 200px;
       object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .property:hover img {
+      transform: scale(1.05);
     }
     .property h3, .property p {
       padding: 0 1rem;
@@ -139,6 +158,11 @@
       max-width: 80%;
       border-radius: 6px;
       font-size: 0.85rem;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+    .property .btn:hover {
+      background: #007944;
+      transform: translateY(-2px);
     }
     .badge {
       position: absolute;
