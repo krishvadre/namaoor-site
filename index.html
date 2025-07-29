@@ -230,7 +230,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 <script>
-  Papa.parse('properties.csv?v=1', {
+const version = Date.now();
+  Papa.parse('properties.csv?v=${version}', {
     download: true,
     header: true,
     complete: function(results) {
