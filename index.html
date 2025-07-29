@@ -193,7 +193,9 @@ let allProperties = [];
 let currentLocation = 'All';
 function renderSlider(properties) {
   const container = document.getElementById('property-slider');
-  $('.slider').slick('unslick');
+  if ($('.slider').hasClass('slick-initialized')) {
+    $('.slider').slick('unslick');
+  }
   container.innerHTML = '';
   properties.forEach(item => {
     const isRent = item.Status && item.Status.toLowerCase().includes('rent');
@@ -239,10 +241,17 @@ function renderSlider(properties) {
 }
 function renderTabs(locations) {
   const tabContainer = document.getElementById('location-tabs');
-  tabContainer.innerHTML = '<button class="active" onclick="filterByLocation(\'All\')">All</button>';
+  tabContainer.innerHTML = '';
+  const allBtn = document.createElement('button');
+  allBtn.textContent = 'All';
+  allBtn.dataset.location = 'All';
+  allBtn.classList.add('active');
+  allBtn.onclick = () => filterByLocation('All');
+  tabContainer.appendChild(allBtn);
   locations.forEach(loc => {
     const btn = document.createElement('button');
     btn.textContent = loc;
+    btn.dataset.location = loc;
     btn.onclick = () => filterByLocation(loc);
     tabContainer.appendChild(btn);
   });
@@ -250,7 +259,7 @@ function renderTabs(locations) {
 function filterByLocation(location) {
   currentLocation = location;
   document.querySelectorAll('#location-tabs button').forEach(btn => {
-    btn.classList.toggle('active', btn.textContent === location);
+    btn.classList.toggle('active', btn.dataset.location === location);
   });
   const filtered = location === 'All' ? allProperties : allProperties.filter(p => p.Location === location);
   renderSlider(filtered);
