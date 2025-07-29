@@ -53,9 +53,27 @@
       text-decoration: none;
       border-radius: 6px;
     }
+    .slider-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      max-width: 1300px;
+      margin: auto;
+    }
     .slider {
-      max-width: 1200px;
-      margin: 0 auto;
+      width: 100%;
+    }
+    .slick-prev, .slick-next {
+      background-color: #ccc;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      z-index: 10;
+    }
+    .slick-prev:before, .slick-next:before {
+      color: #333;
+      font-size: 24px;
     }
     .property {
       background: #fff;
@@ -63,8 +81,7 @@
       border-radius: 14px;
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06);
       overflow: hidden;
-      width: 90%;
-      margin: 1rem auto;
+      margin: 1rem 0.5rem;
       display: flex;
       flex-direction: column;
       position: relative;
@@ -83,11 +100,11 @@
       bottom: 1rem;
       left: 50%;
       transform: translateX(-50%);
-      padding: 0.5rem 1rem;
+      padding: 0.5rem 0.8rem;
       width: auto;
       max-width: 80%;
       border-radius: 6px;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
     }
     .badge {
       position: absolute;
@@ -123,7 +140,9 @@
 </header>
 <section>
   <h2 style="text-align:center;">Explore Properties</h2>
-  <div id="property-slider" class="slider"></div>
+  <div class="slider-wrapper">
+    <div id="property-slider" class="slider"></div>
+  </div>
 </section>
 <footer>
   © 2025 Namaoor Real Estate – All Rights Reserved
