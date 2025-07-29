@@ -209,12 +209,17 @@ function renderPagination(data) {
 }
 
 function filterAndRender() {
-  const search = document.getElementById('searchInput').value.toLowerCase();
-  const status = document.getElementById('statusFilter').value;
+  const search = document.getElementById('searchInput').value.trim().toLowerCase();
+  const status = document.getElementById('statusFilter').value.trim().toLowerCase();
 
   const filtered = allProperties.filter(p => {
-    const matchesSearch = p['Property Name'].toLowerCase().includes(search) || p.Location.toLowerCase().includes(search);
-    const matchesStatus = !status || p.Status.toLowerCase().includes(status);
+    const name = (p['Property Name'] || '').toLowerCase();
+    const location = (p.Location || '').toLowerCase();
+    const propStatus = (p.Status || '').toLowerCase();
+
+    const matchesSearch = name.includes(search) || location.includes(search);
+    const matchesStatus = !status || propStatus.includes(status);
+
     return matchesSearch && matchesStatus;
   });
 
