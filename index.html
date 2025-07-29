@@ -14,25 +14,35 @@
       color: #333;
     }
     header {
-      color: white;
-      text-align: center;
-      padding: 0;
       position: relative;
+      width: 100%;
+      height: auto;
     }
     header img {
       width: 100%;
-      height: 200px;
+      height: auto;
+      max-height: 300px;
       object-fit: cover;
       display: block;
     }
-    header div {
+    header .text-overlay {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      padding: 1rem;
       text-align: center;
       color: white;
+      z-index: 2;
+      padding: 1rem;
+      width: 90%;
+    }
+    header h1 {
+      font-size: 2rem;
+      margin: 0.5rem 0;
+    }
+    header p {
+      font-size: 1.1rem;
+      margin: 0.5rem 0;
     }
     .btn {
       display: inline-block;
@@ -43,29 +53,12 @@
       text-decoration: none;
       border-radius: 6px;
     }
-    section {
-      padding: 2rem;
-      text-align: center;
-    }
-    .slider {
-      max-width: 1200px;
-      margin: 0 auto;
-      position: relative;
-    }
-    .slick-prev, .slick-next {
-      z-index: 10;
-      width: 40px;
-      height: 40px;
-    }
-    .slick-prev {
-      left: -45px;
-    }
-    .slick-next {
-      right: -45px;
-    }
-    .slick-prev:before, .slick-next:before {
-      color: #0057a3;
-      font-size: 36px;
+    .property-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1rem;
     }
     .property {
       background: #fff;
@@ -73,68 +66,25 @@
       border-radius: 14px;
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06);
       overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      position: relative;
-      margin: 0 10px;
-      height: 500px;
+      width: 300px;
       display: flex;
       flex-direction: column;
-    }
-    .property:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.1);
+      position: relative;
     }
     .property img {
       width: 100%;
       height: 200px;
       object-fit: cover;
-      transition: transform 0.4s ease;
     }
-    .property:hover img {
-      transform: scale(1.05);
-    }
-    .property h3 {
-      font-size: 1.25rem;
-      margin: 0.75rem 0 0.25rem;
+    .property h3, .property p {
       padding: 0 1rem;
-      color: #0057a3;
     }
-    .property p {
-      font-size: 0.95rem;
-      margin: 0.25rem 0;
-      padding: 0 1rem;
-      color: #444;
-    }
-    .property .price {
-      font-weight: bold;
-      color: #d32f2f;
-      font-size: 1.1rem;
-      margin-top: 0.5rem;
-    }
-    .property .location {
-      font-style: italic;
-      color: #777;
-      font-size: 0.9rem;
-    }
-    .property .btn-container {
+    .property .btn {
       margin-top: auto;
-      display: flex;
-      justify-content: center;
+      width: 100%;
+      border-radius: 0 0 14px 14px;
       padding: 1rem;
-    }
-    .property .btn-container a {
-      background: #00a859;
-      padding: 0.6rem 1.2rem;
-      border-radius: 6px;
-      text-decoration: none;
-      color: white;
-      font-weight: bold;
-      transition: background 0.3s, box-shadow 0.3s;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    }
-    .property .btn-container a:hover {
-      background: #007944;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+      text-align: center;
     }
     .badge {
       position: absolute;
@@ -146,158 +96,71 @@
       font-size: 0.75rem;
       border-radius: 6px;
       font-weight: bold;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     }
     .badge.rent {
       background-color: #f9a825;
       color: #222;
     }
-    .testimonial {
-      background: #fff;
-      border-left: 4px solid #0057a3;
-      padding: 1rem;
-      margin-bottom: 1rem;
-      font-style: italic;
-    }
-    footer {
-      background: #222;
-      color: white;
-      text-align: center;
-      padding: 1rem;
-      margin-top: 2rem;
-    }
-    iframe {
-      width: 100%;
-      border: none;
-      border-radius: 10px;
-      margin-top: 1rem;
-      height: 250px;
-    }
-    .whatsapp-float {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #25D366;
-      color: white;
-      border-radius: 50%;
-      padding: 0.8rem 1rem;
-      font-size: 1.4rem;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      text-decoration: none;
-      z-index: 100;
-    }
-    .no-properties {
-      font-size: 1.2rem;
-      color: #999;
-      margin-top: 2rem;
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.4rem; }
+      header p { font-size: 0.95rem; }
+      .btn { font-size: 0.8rem; padding: 0.5rem 0.9rem; }
     }
   </style>
-  
 </head>
 <body>
 <header>
   <img src="landing.jpg" alt="Real Estate Coimbatore">
-  <div>
-    <h1 style="font-size:2.5rem; margin:0;">Namaoor Real Estate</h1>
-    <p style="font-size:1.1rem;">Your Trusted Property Partner in Coimbatore</p>
+  <div class="text-overlay">
+    <h1>Namaoor Real Estate</h1>
+    <p>Your Trusted Property Partner in Coimbatore</p>
     <a href="tel:+919363695811" class="btn">📞 Call Now</a>
     <a href="https://wa.me/919363695811" class="btn">💬 Chat</a>
   </div>
 </header>
-
 <section>
   <h2>Explore Properties</h2>
-  <div id="property-slider" class="slider"></div>
+  <div id="property-list" class="property-list"></div>
 </section>
-
-<section>
-  <h2>About Namaoor</h2>
-  <p>Namaoor is a Coimbatore-based real estate company offering expert services in buying, selling, and renting homes, land, villas, and commercial properties. We focus on trust, speed, and service.</p>
-</section>
-
-<section>
-  <h2>Client Testimonials</h2>
-  <div class="testimonial">
-    “Namaoor helped me find my dream home in just 3 days!” — <strong>Anitha R., Saibaba Colony</strong>
-  </div>
-  <div class="testimonial">
-    “They sold my land quickly and handled everything professionally.” — <strong>Senthil M., Vadavalli</strong>
-  </div>
-</section>
-
-<section>
-  <h2>Contact Us</h2>
-  <p><strong>Phone:</strong> <a href="tel:+919363695811">+91 93636 95811</a></p>
-  <p><strong>WhatsApp:</strong> <a href="https://wa.me/919363695811">Chat with Us</a></p>
-  <p><strong>Location:</strong> Coimbatore, Tamil Nadu</p>
-  <p><strong>Email:</strong> krishvadre@gmail.com</p>
-  <iframe src="https://www.google.com/maps?q=Coimbatore&output=embed"></iframe>
-</section>
-
-<a href="https://wa.me/919363695811" class="whatsapp-float">💬</a>
-
 <footer>
   © 2025 Namaoor Real Estate – All Rights Reserved
 </footer>
-
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 <script>
 const version = Date.now();
-  Papa.parse('properties.csv?v=${version}', {
-    download: true,
-    header: true,
-    complete: function(results) {
-      const slider = document.getElementById('property-slider');
-      slider.innerHTML = '';
-
-      results.data.filter(item => item['Property Name']).forEach(item => {
-        const isRent = item.Status && item.Status.toLowerCase().includes('rent');
-        const badgeClass = isRent ? 'badge rent' : 'badge';
-        const badgeText = item.Status || 'For Sale';
-
-        const card = document.createElement('div');
-        card.className = 'property';
-        card.innerHTML = `
-          <span class="${badgeClass}">${badgeText}</span>
-          <img src="${item['Image URL']}" alt="${item['Property Name']}">
-          <h3>${item['Property Name']}</h3>
-          <p>${item.Description}</p>
-          <p class="price">Price: ${item.Price}</p>
-          <p class="location">${item.Location}</p>
-          <a class="btn" href="https://wa.me/919363695811?text=${encodeURIComponent(item['WhatsApp Message'])}" target="_blank">Enquire via WhatsApp</a>
-        `;
-        slider.appendChild(card);
-      });
-
-      $('.slider').slick({
-        dots: true,
-        infinite: true,
-        speed: 300,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 3000,
-        arrows: true,
-        responsive: [
-          {
-            breakpoint: 1024,
-            settings: {
-              slidesToShow: 2
-            }
-          },
-          {
-            breakpoint: 600,
-            settings: {
-              slidesToShow: 1
-            }
-          }
-        ]
-      });
-    }
+function renderProperties(data) {
+  const container = document.getElementById('property-list');
+  container.innerHTML = '';
+  if (!data.length) {
+    container.innerHTML = '<p>No properties found.</p>';
+    return;
+  }
+  data.forEach(item => {
+    const isRent = item.Status && item.Status.toLowerCase().includes('rent');
+    const badgeClass = isRent ? 'badge rent' : 'badge';
+    const badgeText = item.Status || 'For Sale';
+    const div = document.createElement('div');
+    div.className = 'property';
+    div.innerHTML = `
+      <span class="${badgeClass}">${badgeText}</span>
+      <img src="${item['Image URL']}" alt="${item['Property Name']}">
+      <h3>${item['Property Name']}</h3>
+      <p>${item.Description}</p>
+      <p><strong>Price:</strong> ${item.Price}</p>
+      <p class="location">${item.Location}</p>
+      <a class="btn" href="https://wa.me/919363695811?text=${encodeURIComponent(item['WhatsApp Message'])}" target="_blank">Enquire via WhatsApp</a>
+    `;
+    container.appendChild(div);
   });
+}
+Papa.parse(`properties.csv?v=${version}`, {
+  download: true,
+  header: true,
+  complete: function(results) {
+    const data = results.data.filter(p => p['Property Name']);
+    renderProperties(data);
+  }
+});
 </script>
-
 </body>
 </html>
