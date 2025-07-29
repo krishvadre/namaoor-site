@@ -53,16 +53,6 @@
       text-decoration: none;
       border-radius: 6px;
     }
-    .filters {
-      text-align: center;
-      margin: 1rem;
-    }
-    .filters input, .filters select {
-      padding: 0.5rem;
-      margin: 0.5rem;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
     .property-list {
       display: flex;
       flex-wrap: wrap;
@@ -138,14 +128,6 @@
 </header>
 <section>
   <h2>Explore Properties</h2>
-  <div class="filters">
-    <input type="text" id="searchInput" placeholder="Search by name or location...">
-    <select id="statusFilter">
-      <option value="">All</option>
-      <option value="sale">For Sale</option>
-      <option value="rent">For Rent</option>
-    </select>
-  </div>
   <div id="property-list" class="property-list"></div>
   <div class="pagination" id="pagination"></div>
 </section>
@@ -201,30 +183,12 @@ function renderPagination(data) {
     btn.textContent = i;
     btn.onclick = () => {
       currentPage = i;
-      filterAndRender();
+      renderProperties(allProperties);
+      renderPagination(allProperties);
     };
     if (i === currentPage) btn.style.background = '#00a859';
     pagination.appendChild(btn);
   }
-}
-
-function filterAndRender() {
-  const search = document.getElementById('searchInput').value.trim().toLowerCase();
-  const status = document.getElementById('statusFilter').value.trim().toLowerCase();
-
-  const filtered = allProperties.filter(p => {
-    const name = (p['Property Name'] || '').toLowerCase();
-    const location = (p.Location || '').toLowerCase();
-    const propStatus = (p.Status || '').toLowerCase();
-
-    const matchesSearch = name.includes(search) || location.includes(search);
-    const matchesStatus = !status || propStatus.includes(status);
-
-    return matchesSearch && matchesStatus;
-  });
-
-  renderProperties(filtered);
-  renderPagination(filtered);
 }
 
 Papa.parse(`properties.csv?v=${version}`, {
@@ -232,18 +196,9 @@ Papa.parse(`properties.csv?v=${version}`, {
   header: true,
   complete: function(results) {
     allProperties = results.data.filter(p => p['Property Name']);
-    filterAndRender();
+    renderProperties(allProperties);
+    renderPagination(allProperties);
   }
-});
-
-document.getElementById('searchInput').addEventListener('input', () => {
-  currentPage = 1;
-  filterAndRender();
-});
-
-document.getElementById('statusFilter').addEventListener('change', () => {
-  currentPage = 1;
-  filterAndRender();
 });
 </script>
 </body>
