@@ -96,19 +96,6 @@
       background-color: #f9a825;
       color: #222;
     }
-    .pagination {
-      text-align: center;
-      margin-top: 1rem;
-    }
-    .pagination button {
-      padding: 0.5rem 1rem;
-      margin: 0.25rem;
-      background: #0057a3;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
     @media (max-width: 600px) {
       header h1 { font-size: 1.4rem; }
       header p { font-size: 0.95rem; }
@@ -129,7 +116,6 @@
 <section>
   <h2>Explore Properties</h2>
   <div id="property-list" class="property-list"></div>
-  <div class="pagination" id="pagination"></div>
 </section>
 <footer>
   © 2025 Namaoor Real Estate – All Rights Reserved
@@ -137,28 +123,17 @@
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 <script>
 const version = Date.now();
-let allProperties = [];
-let currentPage = 1;
-const itemsPerPage = 6;
-
 function renderProperties(data) {
   const container = document.getElementById('property-list');
   container.innerHTML = '';
-
-  if (data.length === 0) {
+  if (!data.length) {
     container.innerHTML = '<p>No properties found.</p>';
     return;
   }
-
-  const start = (currentPage - 1) * itemsPerPage;
-  const end = start + itemsPerPage;
-  const paginatedItems = data.slice(start, end);
-
-  paginatedItems.forEach(item => {
-    const isRent = item.Status.toLowerCase().includes('rent');
+  data.forEach(item => {
+    const isRent = item.Status && item.Status.toLowerCase().includes('rent');
     const badgeClass = isRent ? 'badge rent' : 'badge';
-    const badgeText = item.Status;
-
+    const badgeText = item.Status || 'For Sale';
     const div = document.createElement('div');
     div.className = 'property';
     div.innerHTML = `
@@ -173,31 +148,12 @@ function renderProperties(data) {
     container.appendChild(div);
   });
 }
-
-function renderPagination(data) {
-  const pagination = document.getElementById('pagination');
-  pagination.innerHTML = '';
-  const pages = Math.ceil(data.length / itemsPerPage);
-  for (let i = 1; i <= pages; i++) {
-    const btn = document.createElement('button');
-    btn.textContent = i;
-    btn.onclick = () => {
-      currentPage = i;
-      renderProperties(allProperties);
-      renderPagination(allProperties);
-    };
-    if (i === currentPage) btn.style.background = '#00a859';
-    pagination.appendChild(btn);
-  }
-}
-
 Papa.parse(`properties.csv?v=${version}`, {
   download: true,
   header: true,
   complete: function(results) {
-    allProperties = results.data.filter(p => p['Property Name']);
-    renderProperties(allProperties);
-    renderPagination(allProperties);
+    const data = results.data.filter(p => p['Property Name']);
+    renderProperties(data);
   }
 });
 </script>
