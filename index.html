@@ -21,7 +21,7 @@
     header img {
       width: 100%;
       height: auto;
-      max-height: 300px;
+      max-height: 200px;
       object-fit: cover;
       display: block;
     }
@@ -103,6 +103,7 @@
       position: relative;
       height: 500px;
       text-align: center;
+      justify-content: space-between;
     }
     .property img {
       width: 100%;
@@ -132,12 +133,9 @@
       color: #555;
     }
     .property .btn {
-      position: absolute;
-      bottom: 1rem;
-      left: 50%;
-      transform: translateX(-50%);
+      margin: 0 auto 1rem;
       padding: 0.5rem 0.8rem;
-      width: fit-content;
+      width: auto;
       max-width: 80%;
       border-radius: 6px;
       font-size: 0.85rem;
@@ -206,10 +204,12 @@ function renderSlider(properties) {
     div.innerHTML = `
       <span class="${badgeClass}">${badgeText}</span>
       <img src="${item['Image URL']}" alt="${item['Property Name']}">
-      <h3>${item['Property Name']}</h3>
-      <p class="price">Price: ${item.Price}</p>
-      <p class="location">${item.Location}</p>
-      <p class="description">${item.Description || ''}</p>
+      <div>
+        <h3>${item['Property Name']}</h3>
+        <p class="price">Price: ${item.Price}</p>
+        <p class="location">${item.Location}</p>
+        <p class="description">${item.Description || ''}</p>
+      </div>
       <a class="btn" href="https://wa.me/919363695811?text=${encodeURIComponent(item['WhatsApp Message'])}" target="_blank">Enquire via WhatsApp</a>
     `;
     container.appendChild(div);
