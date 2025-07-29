@@ -111,6 +111,10 @@
       color: #777;
       font-size: 0.9rem;
     }
+    .property .description {
+      font-size: 0.9rem;
+      color: #555;
+    }
     .property .btn {
       position: absolute;
       bottom: 1rem;
@@ -190,6 +194,7 @@ Papa.parse(`properties.csv?v=${version}`, {
         <h3>${item['Property Name']}</h3>
         <p class="price">Price: ${item.Price}</p>
         <p class="location">${item.Location}</p>
+        <p class="description">${item.Description || ''}</p>
         <a class="btn" href="https://wa.me/919363695811?text=${encodeURIComponent(item['WhatsApp Message'])}" target="_blank">Enquire via WhatsApp</a>
       `;
       container.appendChild(div);
