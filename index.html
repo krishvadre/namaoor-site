@@ -76,6 +76,10 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       position: relative;
       margin: 0 10px;
+      height: 480px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
     .property:hover {
       transform: translateY(-6px);
@@ -177,6 +181,11 @@
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
       text-decoration: none;
       z-index: 100;
+    }
+    .no-properties {
+      font-size: 1.2rem;
+      color: #999;
+      margin-top: 2rem;
     }
   </style>
 </head>
