@@ -216,13 +216,23 @@
       header p { font-size: 0.95rem; }
       .btn { font-size: 0.8rem; padding: 0.5rem 0.9rem; }
     }
+	  @media (max-width: 600px) {
+    header a img {
+      height: 40px !important;
+    }
+  }
   </style>
 </head>
 
 <body>
 <header>
-  <img src="landing.jpg" alt="Real Estate Coimbatore">
-  <div class="text-overlay">
+
+  <div style="position: relative;">
+    <a href="https://www.namaoor.com" style="position: absolute; top: 10px; left: 10px; z-index: 3;">
+      <img src="logo.png" alt="Namaoor Logo" style="height: 60px;">
+    </a>
+    <img src="landing.jpg" alt="Real Estate Coimbatore">
+    <div class="text-overlay">
     <h1>Namaoor Real Estate</h1>
     <p>Your Trusted Property Partner in Coimbatore</p>
     <a href="tel:+919363695811" class="btn">📞 Call Now</a>
