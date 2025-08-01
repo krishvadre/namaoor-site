@@ -262,21 +262,28 @@
 
 /* Style numbered buttons */
 .slick-dots li button {
-  font-size: 14px;
+  background: transparent !important;
   border: 1px solid #ccc;
   color: #333;
-  background: transparent;
   border-radius: 4px;
   padding: 4px 8px;
+  font-size: 14px;
   cursor: pointer;
 }
 
 /* Active number style */
 .slick-dots li.slick-active button {
-  background: #00a859;
-  color: #fff;
+  background: #00a859 !important;
+  color: white !important;
   border-color: #00a859;
 }
+
+.slick-dots li button:before {
+  content: none !important;
+}
+
+
+
   </style>
 </head>
 
@@ -374,7 +381,7 @@ function renderSlider(properties) {
     container.appendChild(div);
   });
 $('.slider').slick({
-  dots: false,
+  dots: true,
   customPaging: function (slider, i) {
     return `<button class="slick-dot-number">${i + 1}</button>`;
   },
