@@ -226,6 +226,24 @@
       height: 40px !important;
     }
   }
+  
+    .slider-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      max-width: 1300px;
+      margin: auto;
+      padding: 0 10px; /* Add padding for mobile spacing */
+    }
+    .slider {
+      width: 95%; /* Make it slightly narrower so arrows are visible */
+    }
+    @media (max-width: 600px) {
+      .slider {
+        width: 90%;
+      }
+    }
   </style>
 </head>
 
