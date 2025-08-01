@@ -255,13 +255,7 @@
   }
 }
 	
-	
-	.slick-dots li {
-  margin: 0 4px;
-}
-
 .slick-dots {
-  text-align: center;
   display: flex !important;
   justify-content: center !important;
   align-items: center;
@@ -271,6 +265,12 @@
   list-style: none;
 }
 
+.slick-dots li button:before {
+  content: none !important;
+}
+
+
+
 
 /* Style numbered buttons */
 .slick-dots li button {
@@ -278,22 +278,25 @@
   border: 1px solid #ccc;
   color: #333;
   border-radius: 4px;
-  padding: 4px 10px;
+  padding: 6px 12px;
   font-size: 14px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  text-align: center;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  box-sizing: border-box;
 }
-
 /* Active number style */
 .slick-dots li.slick-active button {
   background: #00a859;
-  color: #fff;
+  color: white;
   border-color: #00a859;
 }
 
-.slick-dots li button:before {
-  content: none !important;
-}
 
 
 
