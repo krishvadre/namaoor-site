@@ -319,7 +319,7 @@ let currentLocation = 'All';
 
 
 
-<script>
+
 function renderSliderGroupedByType(properties) {
   const container = document.getElementById('property-slider');
   if ($('.slider').hasClass('slick-initialized')) {
@@ -389,7 +389,6 @@ function filterByLocation(location) {
   const filtered = location === 'All' ? allProperties : allProperties.filter(p => p.Location === location);
   renderSliderGroupedByType(filtered);
 }
-</script>
 
 
 
