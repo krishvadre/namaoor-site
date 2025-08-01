@@ -315,56 +315,93 @@
 const version = Date.now();
 let allProperties = [];
 let currentLocation = 'All';
-function renderSlider(properties) {
+
+
+
+
+<script>
+function renderSliderGroupedByType(properties) {
   const container = document.getElementById('property-slider');
   if ($('.slider').hasClass('slick-initialized')) {
     $('.slider').slick('unslick');
   }
   container.innerHTML = '';
+
+  // Group by Property Type
+  const typeGroups = {};
   properties.forEach(item => {
-    const isRent = item.Status && item.Status.toLowerCase().includes('rent');
-    const badgeClass = isRent ? 'badge rent' : 'badge';
-    const badgeText = item.Status || 'For Sale';
-    const div = document.createElement('div');
-    div.className = 'property';
-    div.innerHTML = `
-      <span class="${badgeClass}">${badgeText}</span>
-      <img src="${item['Image URL']}" alt="${item['Property Name']}">
-      <div>
-        <h3>${item['Property Name']}</h3>
-        <p class="price">Price: ${item.Price}</p>
-        <p class="location">${item.Location}</p>
-        <p class="description">${item.Description || ''}</p>
-      </div>
-      <a class="btn" href="https://wa.me/919363695811?text=${encodeURIComponent(item['WhatsApp Message'])}" target="_blank">Enquire via WhatsApp</a>
-    `;
-    container.appendChild(div);
+    const type = item["Property Type"] || "Other";
+    if (!typeGroups[type]) typeGroups[type] = [];
+    typeGroups[type].push(item);
   });
-  $('.slider').slick({
-    dots: true,
-    infinite: true,
-    speed: 300,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    arrows: true,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2
-        }
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 1
-        }
-      }
-    ]
+
+  Object.keys(typeGroups).forEach(type => {
+    const section = document.createElement('div');
+    section.innerHTML = `<h3 style="text-align:left; padding: 10px 0 0 10px;">${type}</h3><div class="slider ${type}-slider"></div>`;
+    container.appendChild(section);
+
+    const slider = section.querySelector('.slider');
+
+    typeGroups[type].forEach(item => {
+      const isRent = item.Status && item.Status.toLowerCase().includes('rent');
+      const badgeClass = isRent ? 'badge rent' : 'badge';
+      const badgeText = item.Status || 'For Sale';
+
+      const div = document.createElement('div');
+      div.className = 'property';
+      div.innerHTML = `
+        <span class="${badgeClass}">${badgeText}</span>
+        <img src="${item['Image URL']}" alt="${item['Property Name']}">
+        <div>
+          <h3>${item['Property Name']}</h3>
+          <p class="price">Price: ${item.Price}</p>
+          <p class="location">${item.Location}<br><small style="color:#777;">(${item["Property Type"]})</small></p>
+          <p class="description">${item.Description || ''}</p>
+        </div>
+        <a class="btn" href="https://wa.me/919363695811?text=${encodeURIComponent(item['WhatsApp Message'])}" target="_blank">Enquire via WhatsApp</a>
+      `;
+      slider.appendChild(div);
+    });
+
+    // Init individual slick slider for each type group
+    $(`.${type}-slider`).slick({
+      dots: true,
+      infinite: true,
+      speed: 300,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 3000,
+      arrows: true,
+      responsive: [
+        { breakpoint: 1024, settings: { slidesToShow: 2 } },
+        { breakpoint: 600, settings: { slidesToShow: 1 } }
+      ]
+    });
   });
 }
+
+function filterByLocation(location) {
+  currentLocation = location;
+  document.querySelectorAll('#location-tabs button').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.location === location);
+  });
+  const filtered = location === 'All' ? allProperties : allProperties.filter(p => p.Location === location);
+  renderSliderGroupedByType(filtered);
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
 function renderTabs(locations) {
   const tabContainer = document.getElementById('location-tabs');
   tabContainer.innerHTML = '';
@@ -382,14 +419,7 @@ function renderTabs(locations) {
     tabContainer.appendChild(btn);
   });
 }
-function filterByLocation(location) {
-  currentLocation = location;
-  document.querySelectorAll('#location-tabs button').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.location === location);
-  });
-  const filtered = location === 'All' ? allProperties : allProperties.filter(p => p.Location === location);
-  renderSlider(filtered);
-}
+
 Papa.parse(`properties.csv?v=${version}`, {
   download: true,
   header: true,
