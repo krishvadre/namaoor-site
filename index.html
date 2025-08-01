@@ -203,32 +203,44 @@
   </style>
 </head>
 <body>
-  <header>
-    <img src="banner.jpg" alt="Namaoor Real Estate Banner">
-  </header>
+<!-- Floating WhatsApp Button -->
+<a href="https://wa.me/919363695811" target="_blank" style="position: fixed; bottom: 20px; right: 20px; background-color: #25d366; color: white; border-radius: 50%; padding: 15px; font-size: 24px; z-index: 1000; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">💬</a>
+<!-- Back to Top Button -->
+<button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" style="position: fixed; bottom: 80px; right: 20px; background-color: #00a859; color: white; padding: 10px; border: none; border-radius: 6px; cursor: pointer; z-index: 999;">↑ Top</button>
+<!-- Rest of the HTML remains unchanged -->
+<header>
 
-  <div class="container">
-    <h2>Our Properties</h2>
-    <div id="location-tabs"></div>
-    <div class="slider" id="property-slider"></div>
+  <div style="position: relative;">
+    <a href="https://www.namaoor.com" style="position: absolute; top: 10px; left: 10px; z-index: 3;">
+      <img src="logo.png" alt="Namaoor Logo" style="height: 60px;">
+    </a>
+    <img src="landing.jpg" alt="Real Estate Coimbatore">
+    <div class="text-overlay">
+    <h1>Namaoor Real Estate</h1>
+    <p>Your Trusted Property Partner in Coimbatore</p>
+    <a href="tel:+919363695811" class="btn">📞 Call Now</a>
+    <a href="https://wa.me/919363695811" class="btn">💬 Chat</a>
   </div>
+</header>
+<section>
+<h1>Best Real Estate Services in Coimbatore</h1>
+<p>Looking to buy or sell DTCP-approved plots, farmland, or residential properties in Coimbatore? Namaoor is your trusted partner. Explore top properties in Coimbatore and beyond.</p>
 
-  <div class="container">
-    <h2>What Our Clients Say</h2>
-    <div class="testimonial">"Namaoor helped me find the perfect DTCP plot in Coimbatore. Highly trustworthy!" – Arjun R.</div>
-    <div class="testimonial">"Very professional team. Transparent dealings and good locations." – Meena P.</div>
+  <h2 style="text-align:center;">Explore Properties</h2>
+  <div class="tabs" id="location-tabs"></div>
+  <div class="slider-wrapper">
+    <div id="property-slider" class="slider"></div>
   </div>
-
-  <div class="container">
-    <h2>Visit Us</h2>
-    <iframe src="https://www.google.com/maps?q=Coimbatore&output=embed"></iframe>
-  </div>
-
-  <footer>
-    <p>&copy; 2025 Namaoor Real Estate | <a href="mailto:info@namaoor.com" style="color:#00a859">info@namaoor.com</a> | +91 93636 95811</p>
-    <p><a href="/sitemap.xml" style="color:#ccc;">Sitemap</a></p>
-  </footer>
-
+</section>
+<section>
+  <h2 style="text-align:center;">Client Testimonials</h2>
+  <div class="testimonial">“Namaoor helped me find my dream home in just 3 days!” — <strong>Anitha R., Saibaba Colony</strong></div>
+  <div class="testimonial">“They sold my land quickly and handled everything professionally.” — <strong>Senthil M., Vadavalli</strong></div>
+</section>
+<iframe src="https://www.google.com/maps?q=Coimbatore&output=embed" allowfullscreen loading="lazy"></iframe>
+<footer>
+  © 2025 Namaoor Real Estate – All Rights Reserved
+</footer>
   <div class="whatsapp-float">
     <a href="https://wa.me/919363695811" target="_blank">💬</a>
   </div>
