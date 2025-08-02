@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Best Real Estate in Coimbatore | Namaoor</title>
+  <title>Best Trusted Real Estate in Coimbatore | Namaoor</title>
 
   <meta name="description" content="Namaoor is your trusted Coimbatore real estate partner for DTCP plots, farmland, and homes. Transparent service, verified listings, and expert support.">
   <meta name="keywords" content="Real Estate Coimbatore, DTCP plots Coimbatore, farmland, villas, houses, properties for sale">
@@ -459,11 +459,11 @@ function filterByLocation(location) {
 Papa.parse(`properties.csv?v=${version}`, {
   download: true,
   header: true,
+  skipEmptyLines: true,
   complete: function(results) {
-    allProperties = results.data.filter(p => p['Property Name']);
-    const uniqueLocations = [...new Set(allProperties.map(p => p.Location))].filter(Boolean);
-    renderTabs(uniqueLocations);
-    renderSlider(allProperties);
+    allProperties = results.data.filter(row => row['Property Type'] && row['Property Type'].trim());
+    populatePropertyTypes();
+    renderProperties(allProperties);
   }
 });
 
@@ -472,7 +472,7 @@ Papa.parse(`properties.csv?v=${version}`, {
 let allProperties = [];
 
   function loadProperties() {
-    Papa.parse('properties.csv?v=1', {
+    Papa.parse('properties.csv?v=${version}', {
       download: true,
       header: true,
       complete: function(results) {
@@ -485,24 +485,21 @@ let allProperties = [];
   
   
   
-    function populatePropertyTypes() {
-    const types = new Set();
-    allProperties.forEach(property => {
-      if (property['Property Type']) {
-        types.add(property['Property Type'].trim());
-      }
-    });
+function populatePropertyTypes() {
+  const types = new Set();
+  allProperties.forEach(property => {
+    const type = property['Property Type']?.trim();
+    if (type) types.add(type);
+  });
 	
-	
-	
-	    const filter = document.getElementById('propertyTypeFilter');
-    types.forEach(type => {
-      const option = document.createElement('option');
-      option.value = type;
-      option.textContent = type;
-      filter.appendChild(option);
-    });
-  }
+	  const filter = document.getElementById('propertyTypeFilter');
+  types.forEach(type => {
+    const option = document.createElement('option');
+    option.value = type;
+    option.textContent = type;
+    filter.appendChild(option);
+  });
+}
   
   
     function filterProperties() {
