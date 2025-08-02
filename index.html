@@ -328,12 +328,6 @@
 <p>Looking to buy or sell DTCP-approved plots, farmland, or residential properties in Coimbatore? Namaoor is your trusted partner. Explore top properties in Coimbatore and beyond.</p>
 
   <h2 style="text-align:center;">Explore Properties</h2>
-  <div class="tabs" id="location-tabs"></div>
-  <div class="slider-wrapper">
-    <div id="property-slider" class="slider"></div>
-  </div>
-</section>
-
 <div style="text-align:center; margin-bottom: 20px;">
   <label for="propertyTypeFilter"><strong>Filter by Property Type:</strong></label>
   <select id="propertyTypeFilter" onchange="filterProperties()">
@@ -341,6 +335,14 @@
     <!-- Options will be populated dynamically -->
   </select>
 </div>
+
+
+  <div class="tabs" id="location-tabs"></div>
+  <div class="slider-wrapper">
+    <div id="property-slider" class="slider"></div>
+  </div>
+</section>
+
 
 
 <section>
@@ -352,7 +354,7 @@
 <footer>
   © 2025 Namaoor Real Estate – All Rights Reserved
 </footer>
-<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
@@ -462,12 +464,19 @@ Papa.parse(`properties.csv?v=${version}`, {
   header: true,
   skipEmptyLines: true,
   complete: function(results) {
-    allProperties = results.data.filter(row => row['Property Type'] && row['Property Type'].trim());
+    allProperties = results.data.filter(row => row['Property Type']?.trim());
+    
+    // Populate location tabs
+    const locations = [...new Set(allProperties.map(p => p.Location).filter(Boolean))];
+    renderTabs(locations);
+
+    // Populate property type dropdown
     populatePropertyTypes();
-    renderProperties(allProperties);
+
+    // Render initial property slider
+    renderSlider(allProperties);
   }
 });
-
 
 
   function loadProperties() {
@@ -478,7 +487,7 @@ Papa.parse(`properties.csv?v=${version}`, {
       complete: function(results) {
         allProperties = results.data.filter(row => row['Property Type']?.trim());
         populatePropertyTypes();
-        renderProperties(allProperties);
+        
       }
     });
   }
@@ -501,32 +510,15 @@ Papa.parse(`properties.csv?v=${version}`, {
     });
   }
   
-  function filterProperties() {
-    const selectedType = document.getElementById('propertyTypeFilter').value;
-    const filtered = selectedType === 'All'
-      ? allProperties
-      : allProperties.filter(p => p['Property Type'].trim() === selectedType);
-    renderProperties(filtered);
-  }
-
+function filterProperties() {
+  const selectedType = document.getElementById('propertyTypeFilter').value;
+  const filtered = selectedType === 'All'
+    ? allProperties
+    : allProperties.filter(p => p['Property Type']?.trim() === selectedType);
+  renderSlider(filtered);
+}
   
- function renderProperties(properties) {
-    const container = document.getElementById('property-list');
-    container.innerHTML = '';
 
-    properties.forEach(property => {
-      const card = document.createElement('div');
-      card.className = 'property-card';
-      card.innerHTML = `
-        <img src="${property['Image URL']}" alt="${property['Property Name']}" />
-        <h3>${property['Property Name']}</h3>
-        <p><strong>Type:</strong> ${property['Property Type']}</p>
-        <p><strong>Location:</strong> ${property['Location']}</p>
-        <p><strong>Price:</strong> ${property['Price']}</p>
-      `;
-      container.appendChild(card);
-    });
-  }
 
   document.addEventListener('DOMContentLoaded', loadProperties);
 </script>
