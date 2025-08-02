@@ -28,6 +28,7 @@
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
+  <link rel="manifest" href="/manifest.json">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -332,7 +333,7 @@
   <div class="slider-wrapper">
     <div id="property-slider" class="slider"></div>
   </div>
-</section>
+</section>	
 <section>
   <h2 style="text-align:center;">Client Testimonials</h2>
   <div class="testimonial">“Namaoor helped me find my dream home in just 3 days!” — <strong>Anitha R., Saibaba Colony</strong></div>
@@ -455,6 +456,22 @@ Papa.parse(`properties.csv?v=${version}`, {
     renderSlider(allProperties);
   }
 });
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What types of properties are available at Namaoor?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We offer DTCP-approved plots, farmland, villas, and residential homes in Coimbatore."
+      }
+    }
+  ]
+}
 </script>
 <!-- Default Statcounter code for Namaoor
 https://www.namaoor.com -->
