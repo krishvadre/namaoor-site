@@ -356,6 +356,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -469,14 +470,13 @@ Papa.parse(`properties.csv?v=${version}`, {
 
 
 
-let allProperties = [];
-
   function loadProperties() {
-    Papa.parse('properties.csv?v=${version}', {
+    Papa.parse('properties.csv?v=1', {
       download: true,
       header: true,
+      skipEmptyLines: true,
       complete: function(results) {
-        allProperties = results.data;
+        allProperties = results.data.filter(row => row['Property Type']?.trim());
         populatePropertyTypes();
         renderProperties(allProperties);
       }
@@ -484,34 +484,33 @@ let allProperties = [];
   }
   
   
-  
-function populatePropertyTypes() {
-  const types = new Set();
-  allProperties.forEach(property => {
-    const type = property['Property Type']?.trim();
-    if (type) types.add(type);
-  });
+  function populatePropertyTypes() {
+    const types = new Set();
+    allProperties.forEach(property => {
+      const type = property['Property Type'].trim();
+      if (type) types.add(type);
+    });
 	
-	  const filter = document.getElementById('propertyTypeFilter');
-  types.forEach(type => {
-    const option = document.createElement('option');
-    option.value = type;
-    option.textContent = type;
-    filter.appendChild(option);
-  });
-}
+	
+    const filter = document.getElementById('propertyTypeFilter');
+    types.forEach(type => {
+      const option = document.createElement('option');
+      option.value = type;
+      option.textContent = type;
+      filter.appendChild(option);
+    });
+  }
   
-  
-    function filterProperties() {
+  function filterProperties() {
     const selectedType = document.getElementById('propertyTypeFilter').value;
     const filtered = selectedType === 'All'
       ? allProperties
       : allProperties.filter(p => p['Property Type'].trim() === selectedType);
     renderProperties(filtered);
   }
+
   
-  
-  function renderProperties(properties) {
+ function renderProperties(properties) {
     const container = document.getElementById('property-list');
     container.innerHTML = '';
 
@@ -519,17 +518,16 @@ function populatePropertyTypes() {
       const card = document.createElement('div');
       card.className = 'property-card';
       card.innerHTML = `
-        <img src="${property.ImageURL}" alt="${property.Title}" />
-        <h3>${property.Title}</h3>
+        <img src="${property['Image URL']}" alt="${property['Property Name']}" />
+        <h3>${property['Property Name']}</h3>
         <p><strong>Type:</strong> ${property['Property Type']}</p>
-        <p><strong>Location:</strong> ${property.Location}</p>
-        <p><strong>Price:</strong> ₹${property.Price}</p>
+        <p><strong>Location:</strong> ${property['Location']}</p>
+        <p><strong>Price:</strong> ${property['Price']}</p>
       `;
       container.appendChild(card);
     });
   }
-  
-  
+
   document.addEventListener('DOMContentLoaded', loadProperties);
 </script>
 <!-- Default Statcounter code for Namaoor
