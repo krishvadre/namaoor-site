@@ -438,6 +438,31 @@
     });
   }
 
+
+
+function populatePropertyTypeFilter() {
+  const select = document.getElementById('propertyTypeFilter');
+  const types = Array.from(new Set(allProperties.map(p => p['Property Type']?.trim()))).filter(Boolean).sort();
+
+  // Clear old options
+  select.innerHTML = '';
+
+  // Add "All" option
+  const allOption = document.createElement('option');
+  allOption.value = 'All';
+  allOption.textContent = 'All Types';
+  select.appendChild(allOption);
+
+  // Add unique types
+  types.forEach(type => {
+    const option = document.createElement('option');
+    option.value = type;
+    option.textContent = type;
+    select.appendChild(option);
+  });
+}
+
+
   function filterByLocation(location) {
     currentLocation = location;
     document.querySelectorAll('#location-tabs button').forEach(btn => {
@@ -459,17 +484,15 @@
   document.getElementById('propertyTypeFilter').addEventListener('change', filterProperties);
 
   Papa.parse(`properties.csv?v=${version}`, {
-    download: true,
-    header: true,
-    complete: function(results) {
-      allProperties = results.data.filter(p => p['Property Name']); // remove empty rows
-      renderSlider(allProperties);
-    },
-    error: function(err) {
-      console.error("Error loading properties:", err);
-      document.getElementById('property-slider').innerHTML = "<p style='text-align:center;'>Unable to load properties. Please try again later.</p>";
-    }
-  });
+  download: true,
+  header: true,
+  complete: function(results) {
+    allProperties = results.data.filter(p => p['Property Name']);
+    populateLocationTabs();           // if implemented
+    populatePropertyTypeFilter();     // ✅ call the function here
+    renderSlider(allProperties);
+  }
+});
 
   const scrollToTopBtn = document.getElementById("scrollToTopBtn");
   window.onscroll = function() {
