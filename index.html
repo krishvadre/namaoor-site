@@ -333,6 +333,16 @@
     <div id="property-slider" class="slider"></div>
   </div>
 </section>
+
+<div style="text-align:center; margin-bottom: 20px;">
+  <label for="propertyTypeFilter"><strong>Filter by Property Type:</strong></label>
+  <select id="propertyTypeFilter" onchange="filterProperties()">
+    <option value="All">All</option>
+    <!-- Options will be populated dynamically -->
+  </select>
+</div>
+
+
 <section>
   <h2 style="text-align:center;">Client Testimonials</h2>
   <div class="testimonial">“Namaoor helped me find my dream home in just 3 days!” — <strong>Anitha R., Saibaba Colony</strong></div>
@@ -345,6 +355,7 @@
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -455,6 +466,74 @@ Papa.parse(`properties.csv?v=${version}`, {
     renderSlider(allProperties);
   }
 });
+
+
+
+let allProperties = [];
+
+  function loadProperties() {
+    Papa.parse('properties.csv?v=1', {
+      download: true,
+      header: true,
+      complete: function(results) {
+        allProperties = results.data;
+        populatePropertyTypes();
+        renderProperties(allProperties);
+      }
+    });
+  }
+  
+  
+  
+    function populatePropertyTypes() {
+    const types = new Set();
+    allProperties.forEach(property => {
+      if (property['Property Type']) {
+        types.add(property['Property Type'].trim());
+      }
+    });
+	
+	
+	
+	    const filter = document.getElementById('propertyTypeFilter');
+    types.forEach(type => {
+      const option = document.createElement('option');
+      option.value = type;
+      option.textContent = type;
+      filter.appendChild(option);
+    });
+  }
+  
+  
+    function filterProperties() {
+    const selectedType = document.getElementById('propertyTypeFilter').value;
+    const filtered = selectedType === 'All'
+      ? allProperties
+      : allProperties.filter(p => p['Property Type'].trim() === selectedType);
+    renderProperties(filtered);
+  }
+  
+  
+  function renderProperties(properties) {
+    const container = document.getElementById('property-list');
+    container.innerHTML = '';
+
+    properties.forEach(property => {
+      const card = document.createElement('div');
+      card.className = 'property-card';
+      card.innerHTML = `
+        <img src="${property.ImageURL}" alt="${property.Title}" />
+        <h3>${property.Title}</h3>
+        <p><strong>Type:</strong> ${property['Property Type']}</p>
+        <p><strong>Location:</strong> ${property.Location}</p>
+        <p><strong>Price:</strong> ₹${property.Price}</p>
+      `;
+      container.appendChild(card);
+    });
+  }
+  
+  
+  document.addEventListener('DOMContentLoaded', loadProperties);
 </script>
 <!-- Default Statcounter code for Namaoor
 https://www.namaoor.com -->
