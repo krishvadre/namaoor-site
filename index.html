@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Best Trusted Real Estate in Coimbatore | Namaoor</title>
+  <title>Best Real Estate in Coimbatore | Namaoor</title>
 
   <meta name="description" content="Namaoor is your trusted Coimbatore real estate partner for DTCP plots, farmland, and homes. Transparent service, verified listings, and expert support.">
   <meta name="keywords" content="Real Estate Coimbatore, DTCP plots Coimbatore, farmland, villas, houses, properties for sale">
@@ -328,23 +328,11 @@
 <p>Looking to buy or sell DTCP-approved plots, farmland, or residential properties in Coimbatore? Namaoor is your trusted partner. Explore top properties in Coimbatore and beyond.</p>
 
   <h2 style="text-align:center;">Explore Properties</h2>
-<div style="text-align:center; margin-bottom: 20px;">
-  <label for="propertyTypeFilter"><strong>Filter by Property Type:</strong></label>
-  <select id="propertyTypeFilter" onchange="filterProperties()">
-    <option value="All">All</option>
-    <!-- Options will be populated dynamically -->
-  </select>
-</div>
-
-
   <div class="tabs" id="location-tabs"></div>
   <div class="slider-wrapper">
     <div id="property-slider" class="slider"></div>
   </div>
 </section>
-
-
-
 <section>
   <h2 style="text-align:center;">Client Testimonials</h2>
   <div class="testimonial">“Namaoor helped me find my dream home in just 3 days!” — <strong>Anitha R., Saibaba Colony</strong></div>
@@ -354,11 +342,9 @@
 <footer>
   © 2025 Namaoor Real Estate – All Rights Reserved
 </footer>
-
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -382,126 +368,93 @@
 </script>
 
 <script>
-  const version = 1;
-  let allProperties = [];
-  let currentLocation = 'All';
-
-  function renderSlider(data) {
-    const slider = document.getElementById('property-slider');
-    slider.innerHTML = '';
-
-    if (data.length === 0) {
-      slider.innerHTML = '<p style="text-align:center;">No properties found.</p>';
-      return;
-    }
-
-    data.forEach(item => {
-      const propertyType = item['Property Type']?.trim();
-      const badge = propertyType === 'For Sale' ? '<div class="badge sale">For Sale</div>' :
-                    propertyType === 'For Rent' ? '<div class="badge rent">For Rent</div>' : '';
-
-      const slide = document.createElement('div');
-      slide.className = 'property';
-      slide.innerHTML = `
-        ${badge}
-        <img loading="lazy" src="${item['Image URL']}" alt="${item['Property Name']}">
-        <div class="info">
-          <h3>${item['Property Name']}</h3>
-          <p>${item['Location']}</p>
-          <p>${item['Property Type']}</p>
-          <p><strong>₹${item['Price']}</strong></p>
-        </div>
-      `;
-      slider.appendChild(slide);
-    });
-
-    if ($(slider).hasClass("slick-initialized")) {
-      $(slider).slick('unslick');
-    }
-
-    $(slider).slick({
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 3,
-      slidesToScroll: 3,
-      responsive: [
-        {
-          breakpoint: 768,
-          settings: { slidesToShow: 1, slidesToScroll: 1 }
-        },
-        {
-          breakpoint: 1024,
-          settings: { slidesToShow: 2, slidesToScroll: 2 }
-        }
-      ]
-    });
+const version = Date.now();
+let allProperties = [];
+let currentLocation = 'All';
+function renderSlider(properties) {
+  const container = document.getElementById('property-slider');
+  if ($('.slider').hasClass('slick-initialized')) {
+    $('.slider').slick('unslick');
   }
-
-
-
-function populatePropertyTypeFilter() {
-  const select = document.getElementById('propertyTypeFilter');
-  const types = Array.from(new Set(allProperties.map(p => p['Property Type']?.trim()))).filter(Boolean).sort();
-
-  // Clear old options
-  select.innerHTML = '';
-
-  // Add "All" option
-  const allOption = document.createElement('option');
-  allOption.value = 'All';
-  allOption.textContent = 'All Types';
-  select.appendChild(allOption);
-
-  // Add unique types
-  types.forEach(type => {
-    const option = document.createElement('option');
-    option.value = type;
-    option.textContent = type;
-    select.appendChild(option);
+  container.innerHTML = '';
+  properties.forEach(item => {
+    const isRent = item.Status && item.Status.toLowerCase().includes('rent');
+    const badgeClass = isRent ? 'badge rent' : 'badge';
+    const badgeText = item.Status || 'For Sale';
+    const div = document.createElement('div');
+    div.className = 'property';
+    div.innerHTML = `
+      <span class="${badgeClass}">${badgeText}</span>
+      <img src="${item['Image URL']}" alt="${item['Property Name']}">
+      <div>
+        <h3>${item['Property Name']}</h3>
+        <p class="price">Price: ${item.Price}</p>
+        <p class="location">${item.Location}</p>
+        <p class="description">${item.Description || ''}</p>
+      </div>
+      <a class="btn" href="https://wa.me/919363695811?text=${encodeURIComponent(item['WhatsApp Message'])}" target="_blank">Enquire via WhatsApp</a>
+    `;
+    container.appendChild(div);
+  });
+$('.slider').slick({
+  dots: true,
+  customPaging: function (slider, i) {
+    return `<button class="slick-dot-number">${i + 1}</button>`;
+  },
+  infinite: true,
+  speed: 300,
+  slidesToShow: 3,
+  slidesToScroll: 1,
+  autoplay: true,
+  autoplaySpeed: 3000,
+  arrows: true,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: { slidesToShow: 2 }
+    },
+    {
+      breakpoint: 600,
+      settings: { slidesToShow: 1 }
+    }
+  ]
+});
+}
+function renderTabs(locations) {
+  const tabContainer = document.getElementById('location-tabs');
+  tabContainer.innerHTML = '';
+  const allBtn = document.createElement('button');
+  allBtn.textContent = 'All';
+  allBtn.dataset.location = 'All';
+  allBtn.classList.add('active');
+  allBtn.onclick = () => filterByLocation('All');
+  tabContainer.appendChild(allBtn);
+  locations.forEach(loc => {
+    const btn = document.createElement('button');
+    btn.textContent = loc;
+    btn.dataset.location = loc;
+    btn.onclick = () => filterByLocation(loc);
+    tabContainer.appendChild(btn);
   });
 }
-
-
-  function filterByLocation(location) {
-    currentLocation = location;
-    document.querySelectorAll('#location-tabs button').forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.location === location);
-    });
-    filterProperties();
-  }
-
-  function filterProperties() {
-    const selectedType = document.getElementById('propertyTypeFilter').value;
-    const filtered = allProperties.filter(p => {
-      const matchesType = selectedType === 'All' || p['Property Type']?.trim() === selectedType;
-      const matchesLocation = currentLocation === 'All' || p.Location === currentLocation;
-      return matchesType && matchesLocation;
-    });
-    renderSlider(filtered);
-  }
-
-  document.getElementById('propertyTypeFilter').addEventListener('change', filterProperties);
-
-  Papa.parse(`properties.csv?v=${version}`, {
+function filterByLocation(location) {
+  currentLocation = location;
+  document.querySelectorAll('#location-tabs button').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.location === location);
+  });
+  const filtered = location === 'All' ? allProperties : allProperties.filter(p => p.Location === location);
+  renderSlider(filtered);
+}
+Papa.parse(`properties.csv?v=${version}`, {
   download: true,
   header: true,
   complete: function(results) {
     allProperties = results.data.filter(p => p['Property Name']);
-    populateLocationTabs();           // if implemented
-    populatePropertyTypeFilter();     // ✅ call the function here
+    const uniqueLocations = [...new Set(allProperties.map(p => p.Location))].filter(Boolean);
+    renderTabs(uniqueLocations);
     renderSlider(allProperties);
   }
 });
-
-  const scrollToTopBtn = document.getElementById("scrollToTopBtn");
-  window.onscroll = function() {
-    scrollToTopBtn.style.display = document.body.scrollTop > 100 || document.documentElement.scrollTop > 100 ? "block" : "none";
-  };
-  scrollToTopBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
-
-
-
 </script>
 <!-- Default Statcounter code for Namaoor
 https://www.namaoor.com -->
