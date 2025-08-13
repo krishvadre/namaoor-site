@@ -2,9 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.namaoor.com/</loc>
-    <lastmod>2025-07-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <lastmod>2025-08-01</lastmod>
+    <priority>1.00</priority>
   </url>
-  <!-- Add more URLs below if you have multiple pages -->
+  <url>
+  <loc>https://www.namaoor.com/blog</loc>
+  <lastmod>2025-08-13</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.8</priority>
+</url>
 </urlset>
