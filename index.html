@@ -5,187 +5,222 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Best Real Estate in Coimbatore | Namaoor</title>
 
-  <!-- SEO -->
   <meta name="description" content="Namaoor is your trusted Coimbatore real estate partner for DTCP plots, farmland, and homes. Transparent service, verified listings, and expert support.">
   <meta name="keywords" content="Real Estate Coimbatore, DTCP plots Coimbatore, farmland, villas, houses, properties for sale">
   <link rel="canonical" href="https://www.namaoor.com" />
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Namaoor Real Estate">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.20/fullpage.min.css">
+  <meta property="og:title" content="Namaoor - Best Real Estate in Coimbatore">
+  <meta property="og:description" content="Buy or sell DTCP plots, farmland, villas & homes with Namaoor. Trusted real estate service in Coimbatore.">
+  <meta property="og:image" content="https://www.namaoor.com/your-header-image.jpg">
+  <meta property="og:url" content="https://www.namaoor.com">
+  <meta property="og:type" content="website">
+
+  <meta name="google-site-verification" content="lax3RauNGVcjOYN5tOQWSFO7wq0uLC-kqBunrkzltsY" />
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Namaoor Real Estate – Coimbatore">
+  <meta name="twitter:description" content="Trusted real estate partner in Coimbatore for buying and selling properties.">
+  <meta name="twitter:image" content="https://www.namaoor.com/landing.jpg">
+
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
-
-  <style>
-    section { display:flex; align-items:center; justify-content:center; flex-direction:column; text-align:center; height:100vh; }
-    header img { width:100%; height:100vh; object-fit:cover; }
-    .text-overlay { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); color:white; text-align:center; }
-    .btn { margin:5px; padding:10px 20px; background:#00a859; color:white; text-decoration:none; border-radius:6px; }
-
-    .slider-wrapper { width: 90%; margin: auto; padding: 20px; }
-    .slider { width: 100%; }
-    .property img { width: 100%; max-height: 300px; object-fit: cover; }
-  </style>
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <!-- Floating WhatsApp Button -->
-  <a href="https://wa.me/919363695811" target="_blank" style="position: fixed; bottom: 20px; right: 20px; background-color: #25d366; color: white; border-radius: 50%; padding: 15px; font-size: 24px; z-index: 1000; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">💬</a>
+<!-- Floating WhatsApp Button -->
+<a href="https://wa.me/919363695811" target="_blank" style="position: fixed; bottom: 20px; right: 20px; background-color: #25d366; color: white; border-radius: 50%; padding: 15px; font-size: 24px; z-index: 1000; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">💬</a>
+<!-- Back to Top Button -->
+<button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" style="position: fixed; bottom: 80px; right: 20px; background-color: #00a859; color: white; padding: 10px; border: none; border-radius: 6px; cursor: pointer; z-index: 999;">↑ Top</button>
+<!-- Rest of the HTML remains unchanged -->
+<header>
 
-  <div id="fullpage">
-    <!-- Slide 1: Hero -->
-    <div class="section">
-      <header>
-        <a href="/" style="position:absolute;top:10px;left:10px;z-index:3;">
-          <img src="logo.png" alt="Namaoor Logo" style="height:60px;">
-        </a>
-        <img src="landing.jpg" alt="Real Estate Coimbatore">
-        <div class="text-overlay">
-          <h1>Namaoor Real Estate</h1>
-          <p>Your Trusted Property Partner in Coimbatore</p>
-          <a href="tel:+919363695811" class="btn">📞 Call Now</a>
-          <a href="https://wa.me/919363695811" class="btn">💬 Chat</a>
-          <a href="/blog" target="_blank" class="btn">📝 Blog</a>
-        </div>
-      </header>
-    </div>
+  
+    <a href="https://www.namaoor.com" style="position: absolute; top: 10px; left: 10px; z-index: 3;">
+	
+      <img src="logo.png" alt="Namaoor Logo" style="height: 60px;">
+    </a>
+    <img src="landing.jpg" alt="Real Estate Coimbatore">
+    <div class="text-overlay">
+    <h1>Namaoor Real Estate</h1>
+    <p>Your Trusted Property Partner in Coimbatore</p>
+    <a href="tel:+919363695811" class="btn">📞 Call Now</a>
+    <a href="https://wa.me/919363695811" class="btn">💬 Chat</a>
+	  <!-- Blog Button -->
+ <a href="/blog" target="_blank" class="btn">📝 Blog</a>
 
-    <!-- Slide 2: Properties -->
-    <div class="section">
-      <h1>Best Real Estate Services in Coimbatore</h1>
-      <p>Looking to buy or sell DTCP-approved plots, farmland, or residential properties in Coimbatore? Namaoor is your trusted partner.</p>
-      <h2>Explore Properties</h2>
-      <div id="location-tabs"></div>
-      <div class="slider-wrapper">
-        <div id="property-slider" class="slider"></div>
-      </div>
-    </div>
-
-    <!-- Slide 3: Testimonials -->
-    <div class="section">
-      <h2>Client Testimonials</h2>
-      <div class="testimonial">“Namaoor helped me find my dream home in just 3 days!” — <strong>Anitha R.</strong></div>
-      <div class="testimonial">“They sold my land quickly and handled everything professionally.” — <strong>Senthil M.</strong></div>
-    </div>
-
-    <!-- Slide 4: Map -->
-    <div class="section">
-      <iframe src="https://www.google.com/maps?q=Coimbatore&output=embed" allowfullscreen loading="lazy" style="width:100%;height:100%;border:none;"></iframe>
-    </div>
-
-    <!-- Slide 5: Footer -->
-    <div class="section">
-      <footer>© 2025 Namaoor Real Estate – All Rights Reserved</footer>
-    </div>
   </div>
+</header>
+<section>
+<h1>Best Real Estate Services in Coimbatore</h1>
+<p>Looking to buy or sell DTCP-approved plots, farmland, or residential properties in Coimbatore? Namaoor is your trusted partner. Explore top properties in Coimbatore and beyond.</p>
 
-  <!-- Scripts -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.20/fullpage.min.js"></script>
+  <h2 style="text-align:center;">Explore Properties</h2>
+  <div class="tabs" id="location-tabs"></div>
+  <div class="slider-wrapper">
+    <div id="property-slider" class="slider"></div>
+  </div>
+</section>	
+<section>
+  <h2 style="text-align:center;">Client Testimonials</h2>
+  <div class="testimonial">“Namaoor helped me find my dream home in just 3 days!” — <strong>Anitha R., Saibaba Colony</strong></div>
+  <div class="testimonial">“They sold my land quickly and handled everything professionally.” — <strong>Senthil M., Vadavalli</strong></div>
+</section>
+<iframe src="https://www.google.com/maps?q=Coimbatore&output=embed" allowfullscreen loading="lazy"></iframe>
+<footer>
+  © 2025 Namaoor Real Estate – All Rights Reserved
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "RealEstateAgent",
+  "name": "Namaoor Real Estate",
+  "url": "https://www.namaoor.com",
+  "logo": "https://www.namaoor.com/logo.png",
+  "description": "Trusted real estate services for buying and selling DTCP-approved plots, farmland, and homes in Coimbatore.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Coimbatore",
+    "addressRegion": "TN",
+    "addressCountry": "IN"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+91-9363695811",
+    "contactType": "Customer Service"
+  }
+}
+</script>
 
-  <script>
-    // Fullpage init
-    new fullpage('#fullpage', {
-      autoScrolling:true,
-      navigation:true,
-      navigationPosition:'right',
-      scrollHorizontally:true,
-      afterLoad: function(origin, destination, direction){
-        if(destination.index === 1){
-          if($('.slider').hasClass('slick-initialized')){
-            $('.slider').slick('setPosition');
-          }
-        }
-      }
-    });
-
-    const version = Date.now();
-    let allProperties = [];
-    let currentLocation = 'All';
-
-    function renderSlider(properties) {
-      const container = document.getElementById('property-slider');
-      if ($('.slider').hasClass('slick-initialized')) {
-        $('.slider').slick('unslick');
-      }
-      container.innerHTML = '';
-      properties.forEach(item => {
-        const isRent = item.Type && item.Type.toLowerCase().includes('rent'); // ✅ fixed
-        const badgeClass = isRent ? 'badge rent' : 'badge';
-        const badgeText = item.Type || 'For Sale'; // ✅ fixed
-        const div = document.createElement('div');
-        div.className = 'property';
-        div.innerHTML = `
-          <span class="${badgeClass}">${badgeText}</span>
-          <img src="${item['Image URL']}" alt="${item['Property Name']}">
-          <div>
-            <h3>${item['Property Name']}</h3>
-            <p class="price">Price: ${item.Price}</p>
-            <p class="location">${item.Location}</p>
-            <p class="description">${item.Description || ''}</p>
-          </div>
-          <a class="btn" href="https://wa.me/919363695811?text=${encodeURIComponent(item['WhatsApp Message'])}" target="_blank">Enquire via WhatsApp</a>
-        `;
-        container.appendChild(div);
-      });
-      $('.slider').slick({
-        dots: true,
-        customPaging: function (slider, i) {
-          return `<button class="slick-dot-number">${i + 1}</button>`;
-        },
-        infinite: true,
-        speed: 300,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 3000,
-        arrows: true,
-        responsive: [
-          { breakpoint: 1024, settings: { slidesToShow: 2 } },
-          { breakpoint: 768, settings: { slidesToShow: 1 } }
-        ]
-      });
+<script>
+const version = Date.now();
+let allProperties = [];
+let currentLocation = 'All';
+function renderSlider(properties) {
+  const container = document.getElementById('property-slider');
+  if ($('.slider').hasClass('slick-initialized')) {
+    $('.slider').slick('unslick');
+  }
+  container.innerHTML = '';
+  properties.forEach(item => {
+    const isRent = item.Status && item.Status.toLowerCase().includes('rent');
+    const badgeClass = isRent ? 'badge rent' : 'badge';
+    const badgeText = item.Status || 'For Sale';
+    const div = document.createElement('div');
+    div.className = 'property';
+    div.innerHTML = `
+      <span class="${badgeClass}">${badgeText}</span>
+      <img src="${item['Image URL']}" alt="${item['Property Name']}">
+      <div>
+        <h3>${item['Property Name']}</h3>
+        <p class="price">Price: ${item.Price}</p>
+        <p class="location">${item.Location}</p>
+        <p class="description">${item.Description || ''}</p>
+      </div>
+      <a class="btn" href="https://wa.me/919363695811?text=${encodeURIComponent(item['WhatsApp Message'])}" target="_blank">Enquire via WhatsApp</a>
+    `;
+    container.appendChild(div);
+  });
+$('.slider').slick({
+  dots: true,
+  customPaging: function (slider, i) {
+    return `<button class="slick-dot-number">${i + 1}</button>`;
+  },
+  infinite: true,
+  speed: 300,
+  slidesToShow: 3,
+  slidesToScroll: 1,
+  autoplay: true,
+  autoplaySpeed: 3000,
+  arrows: true,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: { slidesToShow: 2 }
+    },
+    {
+      breakpoint: 768,
+      settings: { slidesToShow: 1 }
     }
-
-    function renderTabs(locations) {
-      const tabContainer = document.getElementById('location-tabs');
-      tabContainer.innerHTML = '';
-      const allBtn = document.createElement('button');
-      allBtn.textContent = 'All';
-      allBtn.dataset.location = 'All';
-      allBtn.classList.add('active');
-      allBtn.onclick = () => filterByLocation('All');
-      tabContainer.appendChild(allBtn);
-      locations.forEach(loc => {
-        const btn = document.createElement('button');
-        btn.textContent = loc;
-        btn.dataset.location = loc;
-        btn.onclick = () => filterByLocation(loc);
-        tabContainer.appendChild(btn);
-      });
-    }
-
-    function filterByLocation(location) {
-      currentLocation = location;
-      document.querySelectorAll('#location-tabs button').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.location === location);
-      });
-      const filtered = location === 'All' ? allProperties : allProperties.filter(p => p.Location === location);
-      renderSlider(filtered);
-    }
-
-    // Load properties.csv
-    Papa.parse(`properties.csv?v=${version}`, {
-      download: true,
-      header: true,
-      complete: function(results) {
-        allProperties = results.data.filter(p => p['Property Name']);
-        const uniqueLocations = [...new Set(allProperties.map(p => p.Location))].filter(Boolean);
-        renderTabs(uniqueLocations);
-        renderSlider(allProperties);
+  ]		
+});
+}
+function renderTabs(locations) {
+  const tabContainer = document.getElementById('location-tabs');
+  tabContainer.innerHTML = '';
+  const allBtn = document.createElement('button');
+  allBtn.textContent = 'All';
+  allBtn.dataset.location = 'All';
+  allBtn.classList.add('active');
+  allBtn.onclick = () => filterByLocation('All');
+  tabContainer.appendChild(allBtn);
+  locations.forEach(loc => {
+    const btn = document.createElement('button');
+    btn.textContent = loc;
+    btn.dataset.location = loc;
+    btn.onclick = () => filterByLocation(loc);
+    tabContainer.appendChild(btn);
+  });
+}
+function filterByLocation(location) {
+  currentLocation = location;
+  document.querySelectorAll('#location-tabs button').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.location === location);
+  });
+  const filtered = location === 'All' ? allProperties : allProperties.filter(p => p.Location === location);
+  renderSlider(filtered);
+}
+Papa.parse(`properties.csv?v=${version}`, {
+  download: true,
+  header: true,
+  complete: function(results) {
+    allProperties = results.data.filter(p => p['Property Name']);
+    const uniqueLocations = [...new Set(allProperties.map(p => p.Location))].filter(Boolean);
+    renderTabs(uniqueLocations);
+    renderSlider(allProperties);
+  }
+});
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What types of properties are available at Namaoor?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We offer DTCP-approved plots, farmland, villas, and residential homes in Coimbatore."
       }
-    });
-  </script>
+    }
+  ]
+}
+</script>
+<!-- Default Statcounter code for Namaoor
+https://www.namaoor.com -->
+<script type="text/javascript">
+var sc_project=13155135; 
+var sc_invisible=1; 
+var sc_security="56a8d38a"; 
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><a title="Web Analytics"
+href="https://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="https://c.statcounter.com/13155135/0/56a8d38a/1/"
+alt="Web Analytics"
+referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+<!-- End of Statcounter Code -->
 </body>
 </html>
