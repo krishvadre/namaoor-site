@@ -195,5 +195,24 @@ function renderSlider(properties) {
       scrollHorizontally:true
     });
   </script>
+  <script>
+  new fullpage('#fullpage', {
+    autoScrolling:true,
+    navigation:true,
+    navigationPosition:'right',
+    scrollHorizontally:true,
+    onLeave: function(origin, destination, direction){
+      // When entering the "properties" slide, refresh Slick
+      if(destination.index === 1){  
+        setTimeout(() => {
+          if($('.slider').hasClass('slick-initialized')){
+            $('.slider').slick('setPosition');
+          }
+        }, 300);
+      }
+    }
+  });
+</script>
+
 </body>
 </html>
